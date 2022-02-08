@@ -1,0 +1,9 @@
+.div1{
+    display: flex;
+    justify-content: space-between;
+}
+
+#btn2{
+    margin-top: 10px;
+    margin-left: 200px;
+}

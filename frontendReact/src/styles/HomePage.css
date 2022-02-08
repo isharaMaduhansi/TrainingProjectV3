@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Eczar&family=Libre+Baskerville&display=swap');
+ 
+ .bg {
+
+  background-image: url("../assests/images/Home3.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+  height: 850px;
+  background-blend-mode: hard-light;
+}
+
+.container{
+  padding: 200px 0;
+  text-align: center;
+}
+
+.site-card-border-less-wrapper {
+  position: absolute;
+  float: center;
+  background: rgb(0, 0, 0);/* Fallback color */
+  background: rgba(0, 0, 0, 0.6);/* Black background with opacity */
+  color: #ffffff;
+  width: 70%;
+  height: 300px;
+  
+}
+
+
+.site-card-border-less-wrapper h1{
+  font-family: 'Libre Baskerville', serif;
+  color: lightgray;
+}
+
+.site-card-border-less-wrapper p{
+  color: lightsteelblue;
+}
+
+.linkText{
+  color: lightgray;
+  font-family: 'Libre Baskerville';
+  font-size: medium;
+  text-decoration: none;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width:100%;
+  white-space: nowrap;
+  background-color: black;
+  text-align: center;
+  color: white;
+  height: 80px;
+}
+
+@media screen and (max-height:800px) {
+  .bg {
+    height: 650px;
+  
+  }
+  .container{
+    padding: 100px 0;
+  }
+
+  .site-card-border-less-wrapper {
+    width: 95%;
+    height: 350px;
+  }
+}
+

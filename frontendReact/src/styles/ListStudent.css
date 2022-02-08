@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Allerta&family=Diplomata&family=Eczar&family=Libre+Baskerville&display=swap');
+  
+  .sideBar{
+    height: 100%;
+    background-color: #081B33;
+
+  }
+
+  .content{
+min-height: 900px;
+  }
+
+.topic{
+  font-family: 'robot', cursive;
+}
+
+.linkText{
+  color: lightgray;
+  font-family: 'Libre Baskerville';
+  font-size: medium;
+  text-decoration: none;
+}
+.linkText2{
+  color: white;
+  font-size: medium;
+  text-decoration: none;
+}
+
+.buttongroup {
+  text-align: right;
+  color:white;
+  /* color: rebeccapurple; */
+
+}
+
+.bgColor{
+  background-color: white;
+}
+
+.rounded-circle{
+  width: 3rem;
+  background-color:black;
+  border-width:medium
+}
+
+
+

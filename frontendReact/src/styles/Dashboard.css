@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Allerta&family=Diplomata&family=Eczar&family=Libre+Baskerville&display=swap');
+  
+  .sideBar{
+    height: 100%;
+    background-color: #081B33;
+
+  }
+
+  .content{
+min-height: 900px;
+  }
+
+  .topic{
+    font-family: 'robot', cursive;
+  }
+  
+  .head { 
+    width:100%;
+  }
+
+  .logo {
+    float:left; 
+    padding:50px;
+  }
+
+  .div1{
+    display: flex;
+    justify-content: space-between;
+}

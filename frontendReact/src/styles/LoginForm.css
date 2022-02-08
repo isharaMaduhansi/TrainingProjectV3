@@ -1,0 +1,19 @@
+.loginForm{
+    width: 50%;
+    font-family: 'Libre Baskerville', serif;
+    color: lightgray;
+    margin-left: 230px;
+    margin-top: 40px;
+    text-align: center;
+    
+}
+
+@media screen and (max-height:800px) {
+
+    .loginForm{
+        width: 70%;
+        margin-left: 35px;
+        margin-top: 0px;
+    }
+  }
+  
