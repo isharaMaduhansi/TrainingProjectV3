@@ -31,7 +31,6 @@ const LoginPage = () => {
             if (response.status === 200) {
                 toast.success('Login Success!')
                localStorage.setItem('USER_KEY', response.data.token)
-              // console.log(localStorage.getItem('USER_KEY'))
                 history.push('/dashboard')
             }
             else {

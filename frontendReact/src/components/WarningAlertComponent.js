@@ -8,7 +8,7 @@ const WarningAlertComponent = (props) => {
     const wariningAlert = () => {
         if (props.status) {
             return <Alert severity="error">
-                <AlertTitle >Exception Occurred!</AlertTitle>
+                <AlertTitle >Sorry! </AlertTitle>
                              {props.msg}
                  </Alert>
         }

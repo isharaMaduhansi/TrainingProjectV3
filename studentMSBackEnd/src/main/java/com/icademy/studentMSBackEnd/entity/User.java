@@ -22,7 +22,6 @@ public class User implements UserDetails {
     @Column(name = "USER_KEY")
     private String password;
 
-
     @Column(name = "CREATED_ON")
     private Date createdAt;
 
@@ -40,6 +39,18 @@ public class User implements UserDetails {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "bod")
+    private Date bod;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "NIC")
+    private String nicNumber;
 
     @Column(name = "enabled")
     private boolean enabled=true;
@@ -157,6 +168,38 @@ public class User implements UserDetails {
 
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Date getBod() {
+        return bod;
+    }
+
+    public void setBod(Date bod) {
+        this.bod = bod;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getNicNumber() {
+        return nicNumber;
+    }
+
+    public void setNicNumber(String nicNumber) {
+        this.nicNumber = nicNumber;
     }
 
 }

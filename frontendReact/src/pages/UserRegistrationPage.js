@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useParams, Link } from 'react-router-dom';  //useparams gets the key value pairs from the URL
-import StudentService from '../services/StudentService';
 import SuccessAlertComponent from '../components/SuccessAlertComponent';
 import WarningAlertComponent from '../components/WarningAlertComponent';
 import NavBarComponent from '../components/NavBarComponent';
@@ -12,16 +11,20 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import UserDetailService from '../services/UserDetailService';
+import UserInfoComponent from '../components/UserInfoComponent';
 
+const UserRegistrationPage = () => {
 
-const AddStudentPage = () => {
-
+    const [userName, setUserName] = useState('')
     const [firstName, setFirstName] = useState('')
-    const [lastname, setLastname] = useState('')
+    const [lastName, setLastname] = useState('')
+    const [nicNumber, setNic] = useState('')
     const [gender, setGender] = useState('')
-    const [emailId, setEmailId] = useState('')
+    const [email, setEmailId] = useState('')
     const [bod, setBod] = useState('')
-    const [phone, setPhone] = useState('')
+    const [phoneNumber, setPhone] = useState('')
+    const [authority, setAuthority] = useState('')
     const [address, setAddress] = useState('')
     const [message, setMessage] = useState(false)
     const [error, setError] = useState(false)
@@ -42,18 +45,32 @@ const AddStudentPage = () => {
         },
     ];
 
+    const roleTypes = [
+        {
+            value: 'ADMIN',
+        },
+        {
+            value: 'STUDENT',
+        },
+        {
+            value: 'TEACHER',
+        },
+        {
+            value: 'PARENT',
+        },
+    ];
+
     const saveOrUpdateStudent = (e) => {
 
         e.preventDefault();
-        const student = { firstName, lastname, gender, emailId, bod, phone, address }
+        const user = { userName, firstName, lastName,nicNumber, gender, email, bod, phoneNumber, authority, address }
 
         if (id) {
-            StudentService.updateStudent(student, id).then((response) => {
+            UserDetailService.updateUser(user, id).then((response) => {
             
-                console.log(response.data)
                 setMessage(true)
                 history.push({
-                    pathname: '/students',
+                    pathname: '/users',
                     state: { message }
                 });
                 clearForm()
@@ -64,16 +81,16 @@ const AddStudentPage = () => {
                     setAlert(error.response.data.message)
                 }else{
                     setAlert(error.message)
-                }
-                
+                }               
                 
             })
 
         } else {
-            StudentService.addStudent(student).then((response) => {
-
+            UserDetailService.registeruser(user).then((response) => {
+   
+                console.log(response)
                 setMessage(true)
-                history.push('/add-students')
+                history.push('/add-users')
                 clearForm()
 
             }).catch(error => {
@@ -90,13 +107,15 @@ const AddStudentPage = () => {
 
     useEffect(() => {
 
-        StudentService.getStudentById(id).then((response) => {
+        UserDetailService.getUserById(id).then((response) => {
+            setUserName(response.data.userName)
             setFirstName(response.data.firstName)
-            setLastname(response.data.lastname)
+            setLastname(response.data.lastName)
+            setNic(response.data.nicNumber)
             setGender(response.data.gender)
-            setEmailId(response.data.emailId)
+            setEmailId(response.data.email)
             setBod(response.data.bod)
-            setPhone(response.data.phone)
+            setPhone(response.data.phoneNumber)
             setAddress(response.data.address)
         }).catch(error => {
             console.log(error)
@@ -107,21 +126,25 @@ const AddStudentPage = () => {
     const title = () => {
 
         if (id) {
-            return "Update Students"
+            return "Update User"
         } else {
-            return "Add Students"
+            return "Add New User"
         }
     }
 
     const clearForm = () => {
 
+        setUserName('')
         setFirstName('')
         setLastname('')
-        setGender('')
+        setNic('')
         setEmailId('')
         setBod('')
+        setGender('')
         setPhone('')
+        setAuthority('')
         setAddress('')
+
     }
 
     return (
@@ -136,8 +159,15 @@ const AddStudentPage = () => {
                     </Grid>
                     <Grid item xs={12} sm={10} md={10}>
                         <div className='content'>
-                            <h3 className='m-3 topic'> Student Portal</h3>
-                            <BreadcrumbComponent page="Students" />
+                        <div className='div1' >
+                                <div>
+                                    <h3 className='m-3 topic'>User Portal</h3>
+                                </div>
+                                <div className='m-2'>
+                                <UserInfoComponent/>
+                                </div>
+                            </div>
+                            <BreadcrumbComponent page="User-Register" />
                             <div className="container-fluid">
                                 <SuccessAlertComponent status={message} />
                                 <WarningAlertComponent status={error} msg= {alert}/>
@@ -151,15 +181,27 @@ const AddStudentPage = () => {
                                             '& > :not(style)': {
                                                 m: 1,
                                                 width: 900,
-                                                height: 600,
+                                                height: 780,
                                             },
                                         }}
                                     >
                                         <Paper elevation={24}>
 
-                                            <div className='m-4'>
+                                            <div className='m-3'>
                                                 <div className="card-body">
                                                     <form onSubmit={saveOrUpdateStudent}>
+                                                    <div className="form-group mb-2">
+                                                            <TextField
+                                                                required
+                                                                label="User Name"
+                                                                className="textArea"
+                                                                variant="filled"
+                                                                size="normal"
+                                                                placeholder="Ishara_96"
+                                                                value={userName}
+                                                                onChange={(e) => setUserName(e.target.value)}
+                                                            />
+                                                        </div>
                                                         <div className="form-group mb-2">
                                                             <TextField
                                                                 required
@@ -180,8 +222,20 @@ const AddStudentPage = () => {
                                                                 variant="filled"
                                                                 size="normal"
                                                                 placeholder="Hansi"
-                                                                value={lastname}
+                                                                value={lastName}
                                                                 onChange={(e) => setLastname(e.target.value)}
+                                                            />
+                                                        </div>
+                                                        <div className="form-group mb-2">
+                                                            <TextField
+                                                                required
+                                                                label="NIC"
+                                                                className="textArea"
+                                                                variant="filled"
+                                                                size="normal"
+                                                                placeholder="Hansi"
+                                                                value={nicNumber}
+                                                                onChange={(e) => setNic(e.target.value)}
                                                             />
                                                         </div>
                                                         <div className="form-group mb-2">
@@ -210,7 +264,7 @@ const AddStudentPage = () => {
                                                                 size="normal"
                                                                 type="email"
                                                                 placeholder="abc@gmail.com"
-                                                                value={emailId}
+                                                                value={email}
                                                                 onChange={(e) => setEmailId(e.target.value)}
                                                             />
                                                         </div>
@@ -237,16 +291,33 @@ const AddStudentPage = () => {
                                                                 variant="filled"
                                                                 size="normal"
                                                                 placeholder="0707898564"
-                                                                value={phone}
+                                                                value={phoneNumber}
                                                                 onChange={(e) => setPhone(e.target.value)}
                                                             />
                                                         </div>
                                                         <div className="form-group mb-2">
                                                             <TextField
                                                                 required
+                                                                select
+                                                                label="User Role"
+                                                                className="textArea"
+                                                                size="normal"
+                                                                value={authority}
+                                                                variant="filled"
+                                                                onChange={(e) => setAuthority(e.target.value)}>
+                                                                {roleTypes.map((option) => (
+                                                                    <MenuItem key={option.value} value={option.value}>
+                                                                        {option.value}
+                                                                    </MenuItem>
+                                                                ))}
+                                                            </TextField>
+                                                        </div>
+                                                        <div className="form-group mb-2">
+                                                            <TextField
+                                                                required
                                                                 multiline
                                                                 rows={2}
-                                                                maxRows={4}
+                                                                maxRows={2}
                                                                 label="Address"
                                                                 className="textArea"
                                                                 variant="filled"
@@ -260,7 +331,7 @@ const AddStudentPage = () => {
                                                         <button onClick={() => saveOrUpdateStudent()} className='btn btn-outline-primary m-3'>
                                                             Submit
                                                         </button>
-                                                        <Link to="/students" style={{ textDecoration: "none" }} className='btn btn-outline-primary'>Cancel</Link>
+                                                        <Link to="/users" style={{ textDecoration: "none" }} className='btn btn-outline-primary'>Cancel</Link>
                                                     </form>
                                                 </div>
                                             </div>
@@ -277,4 +348,4 @@ const AddStudentPage = () => {
     )
 }
 
-export default AddStudentPage
+export default UserRegistrationPage

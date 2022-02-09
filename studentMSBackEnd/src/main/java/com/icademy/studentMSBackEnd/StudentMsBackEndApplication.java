@@ -2,6 +2,7 @@ package com.icademy.studentMSBackEnd;
 
 import com.icademy.studentMSBackEnd.entity.Authority;
 import com.icademy.studentMSBackEnd.entity.User;
+import com.icademy.studentMSBackEnd.repository.RoleDetailsRepo;
 import com.icademy.studentMSBackEnd.repository.UserDetailsRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class StudentMsBackEndApplication {
 //
 //		List<Authority> authorityList=new ArrayList<>();
 //
-//		authorityList.add(createAuthority("USER","User role"));
+//		authorityList.add(createAuthority("STUDENT","Student role"));
 //		//authorityList.add(createAuthority("ADMIN","Admin role"));
 //
 //		User user=new User();
@@ -52,6 +53,11 @@ public class StudentMsBackEndApplication {
 //		user.setAuthorities(authorityList);
 //
 //		userDetailsRepo.save(user);
+////
+////		Authority authority=new Authority();
+////		authority.setRoleCode("PARENT");
+////		authority.setRoleDescription("Parent Role");
+////		roleDetailsRepo.save(authority);
 //
 //
 //

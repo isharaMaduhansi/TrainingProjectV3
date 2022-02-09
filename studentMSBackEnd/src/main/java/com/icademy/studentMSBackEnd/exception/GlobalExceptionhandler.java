@@ -78,6 +78,12 @@ public class GlobalExceptionhandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
     }
 
+    @ExceptionHandler(UserAlreadySavedException.class)
+    public ResponseEntity<Object> handleUserAlreadySavedException(UserAlreadySavedException ex) {
+        ApiErrors errors = new ApiErrors(ex.getMessage(),"User already exists",HttpStatus.BAD_REQUEST, LocalDateTime.now());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleOtherException(Exception ex) {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useParams , Link} from 'react-router-dom';
-import StudentService from '../services/StudentService';
 import NavBarComponent from '../components/NavBarComponent';
 import ListComponent from '../components/ListComponent';
 import BreadcrumbComponent from '../components/BreadcrumbComponent';
@@ -11,9 +10,11 @@ import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import { amber } from '@mui/material/colors';
 import { Button } from 'antd';
+import UserDetailService from '../services/UserDetailService';
+import UserInfoComponent from '../components/UserInfoComponent';
 
 
-const ViewStudentPage = () => {
+const ViewUserPage = () => {
 
     const [firstName, setFirstName] = useState('')
     const [lastname, setLastname] = useState('')
@@ -24,7 +25,7 @@ const ViewStudentPage = () => {
     const [address, setaddress] = useState('')
     const { id } = useParams();
     const fullName = firstName+" "+lastname
-    const IDsecondary = "Student ID : "+id
+    const IDsecondary = "User ID : "+id
     const birthday = new Date(bod).toLocaleDateString('en-CA')
     const primaryArray = [fullName, gender, emailId, birthday, phone, address]
     const secondaryArray = [IDsecondary, 'Gender', 'Email Address', 'Date of Birth', 'Contact Info', 'Address']
@@ -32,13 +33,13 @@ const ViewStudentPage = () => {
 
     useEffect(() => {
 
-        StudentService.getStudentById(id).then((response) => {
+        UserDetailService.getUserById(id).then((response) => {
             setFirstName(response.data.firstName)
-            setLastname(response.data.lastname)
+            setLastname(response.data.lastName)
             setGender(response.data.gender)
-            setEmailId(response.data.emailId)
+            setEmailId(response.data.email)
             setBod(response.data.bod)
-            setPhone(response.data.phone)
+            setPhone(response.data.phoneNumber)
             setaddress(response.data.address)
         }).catch(error => {
             console.log(error)
@@ -56,12 +57,19 @@ const ViewStudentPage = () => {
                     </Grid>
                     <Grid item xs={12} sm={9} md={10}>
                         <div className='content'>
-                            <h3 className='m-3 topic'> Student Portal</h3>
-                            <BreadcrumbComponent page="Students" />
+                        <div className='div1' >
+                                <div>
+                                    <h3 className='m-3 topic'>User Portal</h3>
+                                </div>
+                                <div className='m-2'>
+                                <UserInfoComponent/>
+                                </div>
+                            </div>
+                            <BreadcrumbComponent page="View User" />
                             <br />
                             <div style={{ display: 'flex', justifyContent: 'flex-end'}} className='container-fluid'>
-                            <Link to="/students">
-                                 <Button type="primary" className="linkText" ghost>Back to Student </Button>
+                            <Link to="/users">
+                                 <Button type="primary" className="linkText" ghost>Back to User </Button>
                             </Link>
                                     </div>
                             <Box className='boxPaper'
@@ -97,4 +105,4 @@ const ViewStudentPage = () => {
     )
 }
 
-export default ViewStudentPage
+export default ViewUserPage

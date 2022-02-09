@@ -14,3 +14,7 @@ min-height: 900px;
     font-family: 'robot', cursive;
   }
   
+  .div1{
+    display: flex;
+    justify-content: space-between;
+}

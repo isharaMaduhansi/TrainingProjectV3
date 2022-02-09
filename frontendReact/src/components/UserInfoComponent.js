@@ -1,23 +1,3 @@
-
-// import Avatar from '@mui/material/Avatar';
-
-
-
-// const UserInfoComponent = () => {
-
-
-
-//     return (
-//         <div>
-//                <div style={{ display: 'inline-block' }} className='h5'></div>
-//             <div style={{ display: 'inline-block' }}> <Avatar /></div>
-         
-//         </div>
-//     )
-// }
-
-// export default UserInfoComponent
-
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import UserService from '../services/UserService';
@@ -32,8 +12,10 @@ import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import { amber } from '@mui/material/colors';
 
 export default function UserInfoComponent() {
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -55,7 +37,15 @@ export default function UserInfoComponent() {
   useEffect(() => {
 
       UserService.fetchUserData().then((response) => {
+
+        if (response.status === 200) {
+
           setData(response.data);
+      }
+      else {
+          console.log(response.data.message)
+      }
+      
       }).catch((e) => {
           localStorage.clear();
           history.push('/')
@@ -76,10 +66,12 @@ export default function UserInfoComponent() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 40, height: 40 }}/>
+            <Avatar sx={{ bgcolor: amber[700], width: 40, height: 40 }}/>
           </IconButton>
         </Tooltip>
-        <Typography sx={{ minWidth: 100 }}><h5>{data.firstName} {data.lastName}</h5></Typography>
+        <div>
+          <span><Typography sx={{ minWidth: 100 }}><h5>{data.firstName} {data.lastName}</h5></Typography></span>
+        </div>    
       </Box>
       <Menu
         anchorEl={anchorEl}

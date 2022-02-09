@@ -20,7 +20,6 @@ import GroupIcon from '@mui/icons-material/Group';
 import UserService from '../services/UserService';
 
 
-
 const Dashboard = () => {
 
   const studentAttendence = [43, 58, 74, 81, 85]
@@ -55,7 +54,7 @@ const Dashboard = () => {
             <div className='content'>
               <div className='div1' >
                 <div>
-                  {data && data.roles && data.roles.filter(value => value.roleCode === 'ADMIN').length > 0 && <h3 className='m-3 topic'>Admin Dashboard</h3>}
+                 <h3 className='m-3 topic'>Admin Dashboard</h3>
                 </div>
                 <div className='m-2'>
                 <UserInfoComponent/>

@@ -44,10 +44,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/auth/login")
+                .antMatchers("/",
+                        "/favicon.ico",
+                        "/**/*.png",
+                        "/**/*.gif",
+                        "/**/*.svg",
+                        "/**/*.jpg",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js")
                 .permitAll()
-                .antMatchers(HttpMethod.OPTIONS, "/api/v1/auth/login")
+                .antMatchers("/api/v1/auth/**")
                 .permitAll()
+                .antMatchers("/api/v1/user/**")
+                .permitAll()
+                .antMatchers("/api/v1/students/**")
+                .permitAll()
+//                .hasAnyAuthority("ADMIN")
                 .anyRequest()
                 .authenticated().and()
                 .addFilterBefore(new JWTAuthenticationFilter(userService, jWTTokenHelper),

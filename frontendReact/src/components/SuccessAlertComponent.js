@@ -10,7 +10,7 @@ const SuccessAlertComponent = (props) => {
             return <Alert severity="success">
                 <AlertTitle >Success!</AlertTitle>
                 You have done successfully <strong>
-                    &nbsp;&nbsp;Back to <Link to="/students">Student</Link></strong>
+                    &nbsp;&nbsp;click to <Link to="/users">View</Link></strong>
             </Alert>
         }
     }

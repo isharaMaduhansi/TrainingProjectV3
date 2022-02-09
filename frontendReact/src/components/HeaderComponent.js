@@ -31,7 +31,6 @@ const HeaderComponent = () => {
                             <ButtonGroup variant="text" aria-label="text button group" className='buttongroup'>
                                 <Button>Services</Button>
                                 <Button>About Us</Button>
-                                <Button>Contact</Button>
 
                             </ButtonGroup>
                         </Box>
